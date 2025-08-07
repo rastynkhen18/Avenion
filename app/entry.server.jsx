@@ -49,6 +49,11 @@ export default async function handleRequest(
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
+   // ✅ Set headers to allow iframe embedding and loosen CSP
+  //  responseHeaders.set('Content-Type', 'text/html');
+  //  responseHeaders.set('Content-Security-Policy', "frame-ancestors *");
+  //  responseHeaders.set('X-Frame-Options', 'ALLOWALL');
+
   return new Response(body, {
     headers: responseHeaders,
     status: responseStatusCode,
