@@ -1,13 +1,14 @@
-import {Await, useLoaderData, Link} from 'react-router';
-import {Suspense} from 'react';
-import {Image} from '@shopify/hydrogen';
-import {ProductItem} from '~/components/ProductItem';
+import { Await, useLoaderData, Link } from 'react-router';
+import { Suspense } from 'react';
+import { Image } from '@shopify/hydrogen';
+import { ProductItem } from '~/components/ProductItem';
+import Slippers from '~/assets/images/clog-slippers_04.png';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{ title: 'Hydrogen | Home' }];
 };
 
 /**
@@ -20,7 +21,7 @@ export async function loader(args) {
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
-  return {...deferredData, ...criticalData};
+  return { ...deferredData, ...criticalData };
 }
 
 /**
@@ -28,8 +29,8 @@ export async function loader(args) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {LoaderFunctionArgs}
  */
-async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
+async function loadCriticalData({ context }) {
+  const [{ collections }] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
     // Add other queries here, so that they are loaded in parallel
   ]);
@@ -45,7 +46,7 @@ async function loadCriticalData({context}) {
  * Make sure to not throw any errors here, as it will cause the page to 500.
  * @param {LoaderFunctionArgs}
  */
-function loadDeferredData({context}) {
+function loadDeferredData({ context }) {
   const recommendedProducts = context.storefront
     .query(RECOMMENDED_PRODUCTS_QUERY)
     .catch((error) => {
@@ -63,10 +64,23 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
-    <div className="bg-green-500 p-0">
-      sdsdsssss
-      {/* <FeaturedCollection collection={data.featuredCollection} /> */}
-      <RecommendedProducts products={data.recommendedProducts} />
+    <div>
+      <section className='flex justify-evenly items-center flex-col md:flex-row p-0 w-full h-[80vh] bg-[#f3f3f3f3]'>
+        <div>
+          <h1 className='text-5xl'>PREMIUM CLOG SLIPPERS</h1>
+          <h1 className='text-5xl text-[#e44040]'>Sale 20% Off</h1>
+          <button className='bg-[#313131] text-[#fff] px-4 py-2 cursor-pointer'>SHOP NOW</button>
+        </div>
+
+        <div>
+          <img src={Slippers} alt="" className='w-xl h-auto' />
+        </div>
+      </section>
+
+      <section>
+        {/* <FeaturedCollection collection={data.featuredCollection} /> */}
+        <RecommendedProducts products={data.recommendedProducts} />
+      </section>
     </div>
   );
 }
@@ -76,7 +90,7 @@ export default function Homepage() {
  *   collection: FeaturedCollectionFragment;
  * }}
  */
-function FeaturedCollection({collection}) {
+function FeaturedCollection({ collection }) {
   if (!collection) return null;
   const image = collection?.image;
   return (
@@ -99,7 +113,7 @@ function FeaturedCollection({collection}) {
  *   products: Promise<RecommendedProductsQuery | null>;
  * }}
  */
-function RecommendedProducts({products}) {
+function RecommendedProducts({ products }) {
   return (
     <div className="recommended-products">
       <h2>Recommended Products</h2>
@@ -109,8 +123,8 @@ function RecommendedProducts({products}) {
             <div className="recommended-products-grid">
               {response
                 ? response.products.nodes.map((product) => (
-                    <ProductItem key={product.id} product={product} />
-                  ))
+                  <ProductItem key={product.id} product={product} />
+                ))
                 : null}
             </div>
           )}

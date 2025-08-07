@@ -160,11 +160,6 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-        <div className='flex justify-between items-center flex-col p-0 bg-blue-500'>
-          <h1 className='text-3xl'>PREMIUM CLOG SLIPPERS</h1>
-          <h1 classsname='text-3xl text-[]'>Sale 20% Off</h1>
-          <button className='bg-[#000] text-[#fff] px-4 py-2'>SHOP NOW</button>
-        </div>
         {data ? (
           <Analytics.Provider
             cart={data.cart}
