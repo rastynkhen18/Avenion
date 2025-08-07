@@ -13,7 +13,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
     <header className="flex justify-center items-center p-4">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         {/* <strong>{shop.name}</strong> */}
-      <img src={Logo} alt="" className='w-24 h-auto' />
+      <img src={Logo} alt="Avenion Style Logo" className='w-24 h-auto' />
       </NavLink>
       <HeaderMenu
         menu={menu}

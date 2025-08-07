@@ -8,7 +8,7 @@ import Slippers from '~/assets/images/clog-slippers_04.png';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{ title: 'Hydrogen | Home' }];
+  return [{ title: 'Avenion Style | Home' }];
 };
 
 /**
